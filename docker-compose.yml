@@ -1,0 +1,47 @@
+version: "3"
+services:
+  app:
+    image: 708u/laravel-alpine:7.4.3-for-develop
+    container_name: sample-app
+    working_dir: "/app"
+    environment:
+      - DB_HOST=mysql
+      - REDIS_HOST=redis
+      - CHROMEDRIVER_HOST=chrome_driver
+    volumes:
+      - "./:/app"
+    ports:
+      - "8080:8080"
+    tty: true
+
+  node:
+    image: node:13.8.0-alpine
+    container_name: sample-app-node
+    volumes:
+    #   - ${PROJECT_PATH:-./src}:/work
+      - ./:/app
+    working_dir: /app
+    tty: true
+
+  asset-watcher:
+    image: node:13.8.0-alpine
+    container_name: sample-app-asset-watcher
+    working_dir: "/app/blog"
+    volumes:
+      - "./:/app"
+    command: yarn run watch
+    tty: true
+
+  mysql:
+    image: mysql:5.7
+    container_name: sample-app-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: sample
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
+    ports:
+      - 3306:3306
+    volumes:
+      - ./mysql/init:/docker-entrypoint-initdb.d:ro
+      - ./mysql-data:/var/lib/mysql
