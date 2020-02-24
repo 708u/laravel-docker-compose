@@ -6,6 +6,9 @@ services:
     working_dir: "/app"
     volumes:
       - "./:/app"
+    depends_on:
+      - mysql
+      - redis
     ports:
       - "8080:8080"
     tty: true
