@@ -32,6 +32,7 @@ services:
     container_name: ${APP_NAME:-laravel}-nginx
     volumes:
       - "./nginx.conf:/etc/nginx/nginx.conf"
+      - "./docker/nginx/nginx.conf:/etc/nginx/nginx.conf"
       - "./public:/app/public"
     ports:
       - "80:80"
@@ -48,8 +49,10 @@ services:
     ports:
       - "3306:3306"
     volumes:
-      - ./mysql/init:/docker-entrypoint-initdb.d:ro
-      - ./mysql-data:/var/lib/mysql
+      - "./mysql-data:/var/lib/mysql"
+      - "./docker/mysql/my.cnf:/etc/mysql/conf.d/my.cnf"
+      # Create testing DB
+      # - "./docker/mysql/init/create-testing-db.sql:/docker-entrypoint-initdb.d/create-testing-db.sql"
 
   redis:
     image: redis:5.0.7-alpine
