@@ -2,7 +2,7 @@ version: "3.7"
 services:
   app:
     image: 708u/laravel-alpine:7.4.3-for-develop
-    container_name: sample-app
+    container_name: ${APP_NAME:-sample}-app
     working_dir: "/app"
     volumes:
       - "./:/app"
@@ -12,7 +12,7 @@ services:
 
   node:
     image: node:13.8.0-alpine
-    container_name: sample-app-node
+    container_name: ${APP_NAME:-sample}-node
     volumes:
     #   - ${PROJECT_PATH:-./src}:/work
       - ./:/app
@@ -21,7 +21,7 @@ services:
 
   asset-watcher:
     image: node:13.8.0-alpine
-    container_name: sample-app-asset-watcher
+    container_name: ${APP_NAME:-sample}-asset-watcher
     working_dir: "/app/test"
     volumes:
       - "./test:/app/test"
@@ -30,21 +30,21 @@ services:
 
   mysql:
     image: mysql:5.7
-    container_name: sample-app-mysql
+    container_name: ${APP_NAME:-sample}-mysql
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: sample
       MYSQL_USER: root
       MYSQL_PASSWORD: root
     ports:
-      - 3306:3306
+      - "3306:3306"
     volumes:
       - ./mysql/init:/docker-entrypoint-initdb.d:ro
       - ./mysql-data:/var/lib/mysql
 
   redis:
     image: redis:5.0.7-alpine
-    container_name: sample-app-redis
+    container_name: ${APP_NAME:-sample}-redis
     ports:
       - "6379:6379"
     volumes:
