@@ -1,4 +1,4 @@
-version: "3"
+version: "3.7"
 services:
   app:
     image: 708u/laravel-alpine:7.4.3-for-develop
