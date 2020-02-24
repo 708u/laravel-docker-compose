@@ -4,8 +4,6 @@ services:
     image: 708u/laravel-alpine:7.4.3-for-develop
     container_name: sample-app
     working_dir: "/app"
-    environment:
-      - DB_HOST=mysql
     volumes:
       - "./:/app"
     ports:
