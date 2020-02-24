@@ -13,17 +13,17 @@ services:
   node:
     image: node:13.8.0-alpine
     container_name: ${APP_NAME:-laravel}-node
+    working_dir: /app
     volumes:
       - ./:/app
-    working_dir: /app
     tty: true
 
   asset-watcher:
     image: node:13.8.0-alpine
     container_name: ${APP_NAME:-laravel}-asset-watcher
-    working_dir: "/app/test"
+    working_dir: "/app"
     volumes:
-      - "./test:/app/test"
+      - "./:/app"
     command: yarn run watch
     tty: true
 
@@ -32,7 +32,7 @@ services:
     container_name: ${APP_NAME:-laravel}-nginx
     volumes:
       - "./nginx.conf:/etc/nginx/nginx.conf"
-      - "./test/public:/app/test/public"
+      - "./public:/app/public"
     ports:
       - "80:80"
     tty: true
