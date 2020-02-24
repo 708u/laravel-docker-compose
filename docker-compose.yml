@@ -6,7 +6,6 @@ services:
     working_dir: "/app"
     environment:
       - DB_HOST=mysql
-      - REDIS_HOST=redis
       - CHROMEDRIVER_HOST=chrome_driver
     volumes:
       - "./:/app"
