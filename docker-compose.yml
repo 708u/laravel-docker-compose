@@ -24,9 +24,9 @@ services:
   asset-watcher:
     image: node:13.8.0-alpine
     container_name: sample-app-asset-watcher
-    working_dir: "/app/blog"
+    working_dir: "/app/test"
     volumes:
-      - "./:/app"
+      - "./test:/app/test"
     command: yarn run watch
     tty: true
 
@@ -43,3 +43,13 @@ services:
     volumes:
       - ./mysql/init:/docker-entrypoint-initdb.d:ro
       - ./mysql-data:/var/lib/mysql
+
+  redis:
+    image: redis:5.0.7-alpine
+    container_name: sample-app-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - "./redis-data:/data"
+    hostname: redis
+    tty: true
