@@ -58,5 +58,4 @@ services:
       - "6379:6379"
     volumes:
       - "./redis-data:/data"
-    hostname: redis
     tty: true
