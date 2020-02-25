@@ -74,3 +74,8 @@ opt-clear:
 .PHONY: tinker
 tinker:
 	docker-compose exec app php artisan tinker
+
+# Run tests.
+.PHONY: test
+test:
+	docker-compose exec app vendor/bin/phpunit
