@@ -9,8 +9,7 @@ Build develop environment of laravel  application
 git clone git@github.com:naoyaUda/laravel-docker-compose.git
 cd laravel-docker-compose
 make create-laravel-app
-cp -r src /path/to/your/app
-mv src your-app-name
+cp -r src /path/to/your/app/name
 ```
 
 ### Installation
