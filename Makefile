@@ -23,6 +23,11 @@ restart:
 down:
 	docker-compose down
 
+# Remove container, network, volumes, images
+.PHONY: destroy
+destroy:
+	docker-compose down --rmi all --volumes
+
 # Create new laravel application. Do Not execute this command if you've already created it in this directory.
 .PHONY: create-laravel-app
 laravel-app:
