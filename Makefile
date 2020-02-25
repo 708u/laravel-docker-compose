@@ -86,3 +86,8 @@ tinker:
 .PHONY: test
 test:
 	docker-compose exec app vendor/bin/phpunit
+
+# Run dusk tests.
+.PHONY: dusk
+dusk:
+	docker-compose exec app php artisan dusk
