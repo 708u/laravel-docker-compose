@@ -11,6 +11,17 @@ services:
       - "8080:8080"
     tty: true
 
+  # If you use the laravel queue worker in your app, you should remove this comment out.
+  # queue-worker:
+  #   image: 708u/laravel-alpine:7.4.3-for-develop
+  #   container_name: ${APP_NAME:-laravel}-queue-worker
+  #   working_dir: "/app"
+  #   volumes:
+  #     - "./:/app"
+  #     - ./docker/php/php.ini:/usr/local/etc/php/php.ini
+  #   command: php artisan queue:work
+  #   tty: true
+
   node:
     image: node:13.8.0-alpine
     container_name: ${APP_NAME:-laravel}-node
