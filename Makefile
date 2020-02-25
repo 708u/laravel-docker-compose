@@ -44,6 +44,7 @@ install:
 	docker-compose exec app php artisan key:generate
 	@make db-fresh
 	@make up
+	@echo Install ${APP_NAME} successfully finished!
 
 # Reinstall laravel peoject.
 .PHONY: reinstall
@@ -71,7 +72,7 @@ composer:
 db-fresh:
 	docker-compose exec app php artisan migrate:fresh --seed
 
-# Crear all cache.
+# Clear all cache.
 .PHONY: opt-clear
 opt-clear:
 	docker-compose exec app php artisan optimize:clear
