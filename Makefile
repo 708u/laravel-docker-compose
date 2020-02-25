@@ -39,3 +39,18 @@ install:
 	docker-compose exec app php artisan key:generate
 	docker-compose exec app php artisan migrate:fresh --seed
 	docker-compose restart
+
+# Attach an app container.
+.PHONY: app
+app:
+	docker-compose exec app bash
+
+# Attach a node container.
+.PHONY: node
+node:
+	docker-compose exec node sh
+
+# Attach a composer container.
+.PHONY: composer
+composer:
+	docker run --rm -it -v ${PWD}:/app 708u/composer:1.9.3 bash
