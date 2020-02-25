@@ -37,13 +37,20 @@ laravel-app:
 # Install laravel project from dependencies and initialize environments.
 .PHONY: install
 install:
-	docker-compose up -d --build
+	docker-compose up -d app node
 	cp .env.example .env
 	docker run --rm -v ${PWD}:/app 708u/composer:1.9.3 composer install
 	docker-compose exec node yarn install --force
 	docker-compose exec app php artisan key:generate
+	docker-compose up -d mysql
 	docker-compose exec app php artisan migrate:fresh --seed
-	docker-compose restart
+	@make up
+
+# Reinstall laravel peoject.
+.PHONY: reinstall
+reinstall:
+	@make down
+	@make install
 
 # Attach an app container.
 .PHONY: app
