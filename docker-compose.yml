@@ -80,7 +80,7 @@ services:
   #   image: selenium/standalone-chrome
   #   container_name: ${PROJECT:-laravel}-selenium
   #   ports:
-  #     - 4444:4444
+  #     - "4444:4444"
 
 volumes:
   mysql-store:
