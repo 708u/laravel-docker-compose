@@ -40,12 +40,12 @@ create-laravel-app:
 .PHONY: install
 install:
 	cp .env.example .env
-	docker-compose up -d app node mysql
+	docker-compose up -d --build
 	docker run --rm -it -v ${PWD}:/app 708u/composer:1.9.3 composer install
 	docker-compose exec node yarn install --force
 	docker-compose exec app php artisan key:generate
 	docker-compose exec app php artisan migrate --seed
-	@make up
+	@make restart
 	@echo Install ${APP_NAME} successfully finished!
 
 # Reinstall laravel peoject.
