@@ -69,3 +69,8 @@ db-fresh:
 .PHONY: opt-clear
 opt-clear:
 	docker-compose exec app php artisan optimize:clear
+
+# Open tinker interface.
+.PHONY: tinker
+tinker:
+	docker-compose exec app php artisan tinker
