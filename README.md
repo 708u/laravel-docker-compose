@@ -22,7 +22,7 @@ vi .env.example
 - DB_HOST=127.0.0.1
 + DB_HOST=mysql
 - DB_PASSWORD=
-- DB_PASSWORD=PASSWORD
++ DB_PASSWORD=PASSWORD
 
 make install
 ```
