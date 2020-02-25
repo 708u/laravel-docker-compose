@@ -26,3 +26,12 @@ vi .env.example
 
 make install
 ```
+
+### Using XDebug
+
+- Simply copy .vscode directory to your app. You can use XDebug on vs code.
+
+```bash
+cp .vscode /pass/to/your/app
+echo .vscode/ >> .gitignore
+```
