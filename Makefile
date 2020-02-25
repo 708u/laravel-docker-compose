@@ -43,7 +43,7 @@ install:
 	docker-compose exec node yarn install --force
 	docker-compose exec app php artisan key:generate
 	docker-compose up -d mysql
-	docker-compose exec app php artisan migrate:fresh --seed
+	@make db-fresh
 	@make up
 
 # Reinstall laravel peoject.
