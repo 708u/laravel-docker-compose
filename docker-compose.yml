@@ -36,6 +36,8 @@ services:
       - "./public:/app/public"
     ports:
       - "80:80"
+    depends_on:
+      - app
     tty: true
 
   mysql:
