@@ -42,7 +42,7 @@ install:
 	docker run --rm -v ${PWD}:/app 708u/composer:1.9.3 composer install
 	docker-compose exec node yarn install --force
 	docker-compose exec app php artisan key:generate
-	@make db-fresh
+	docker-compose exec app php artisan migrate --seed
 	@make up
 	@echo Install ${APP_NAME} successfully finished!
 
