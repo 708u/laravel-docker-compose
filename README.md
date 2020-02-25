@@ -37,6 +37,20 @@ $ make install
 - Simply copy .vscode directory to your app. You can use XDebug on vs code.
 
 ```bash
-cp .vscode /pass/to/your/app
-echo .vscode/ >> .gitignore
+$ cp .vscode /pass/to/your/app
+$ echo .vscode/ >> .gitignore
 ```
+
+### E2E test with laravel Dusk
+
+- First, Install laravel dusk.
+
+```bash
+$ make composer
+$ composer require --dev laravel/dusk
+$ exit
+$ make app
+$ php artisan dusk:install
+```
+
+- TODO: write dusk config and how to fix DuskTestCase.
