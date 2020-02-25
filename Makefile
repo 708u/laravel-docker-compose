@@ -59,3 +59,13 @@ node:
 .PHONY: composer
 composer:
 	docker run --rm -it -v ${PWD}:/app 708u/composer:1.9.3 bash
+
+# Exec fresh db with seeding.
+.PHONY: db-fresh
+db-fresh:
+	docker-compose exec app php artisan migrate:fresh --seed
+
+# Crear all cache.
+.PHONY: opt-clear
+opt-clear:
+	docker-compose exec app php artisan optimize:clear
