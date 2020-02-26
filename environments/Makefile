@@ -13,7 +13,7 @@ ps:
 stop:
 	docker-compose stop
 
-# docker-compose stop and up
+# docker-compose restart
 .PHONY: restart
 restart:
 	@make stop
@@ -34,10 +34,10 @@ destroy:
 install:
 	cp .env.example .env
 	docker-compose up -d --build
-	docker run --rm -it -v ${PWD}:/app 708u/composer:1.9.3 composer install
-	docker-compose exec node yarn install --force
+	@make composer-install
+	@make yarn-interface
 	docker-compose exec app php artisan key:generate
-	docker-compose exec app php artisan migrate --seed
+	@make migrate
 	@make restart
 	@echo Install ${APP_NAME} successfully finished!
 
@@ -46,6 +46,14 @@ install:
 reinstall:
 	@make down
 	@make install
+
+# Update dependencies.
+.PHONY: update
+update:
+	@make composer-install
+	@make yarn-install
+	@make db-fresh
+	@make restart
 
 # Attach an app container.
 .PHONY: app
@@ -61,6 +69,21 @@ node:
 .PHONY: composer
 composer:
 	docker run --rm -it -v ${PWD}:/app 708u/composer:1.9.3 bash
+
+# Exec composer install
+.PHONY: composer-install
+composer-install:
+	docker run --rm -it -v ${PWD}:/app 708u/composer:1.9.3 composer install
+
+# Exec yarn install
+.PHONY: yarn-install
+yarn-install:
+	docker-compose exec node yarn
+
+# Exec migrate.
+.PHONY: migrate
+migrate:
+	docker-compose exec app php artisan migrate --seed
 
 # Exec fresh db with seeding.
 .PHONY: db-fresh
@@ -82,7 +105,7 @@ tinker:
 test:
 	docker-compose exec app vendor/bin/phpunit
 
-# Run dusk tests.
+# Run dusk tests
 .PHONY: dusk
 dusk:
 	docker-compose exec app php artisan dusk
