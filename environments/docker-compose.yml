@@ -36,7 +36,10 @@ services:
     working_dir: "/app"
     volumes:
       - "./:/app"
-    command: "yarn watch"
+    # For BrowserSync.
+    ports:
+      "3000:3000"
+    command: "yarn watch-poll"
     tty: true
 
   nginx:
