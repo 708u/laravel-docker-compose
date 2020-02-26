@@ -1,4 +1,5 @@
 # laravel-docker-compose
+
 Build develop environment of laravel application.
 
 ## Usage
@@ -8,7 +9,7 @@ Build develop environment of laravel application.
 ```bash
 $ git clone git@github.com:naoyaUda/laravel-docker-compose.git
 $ cd laravel-docker-compose
-$ make create-laravel-app
+$ make
 $ cp -r src /path/to/your/app/name
 ```
 
