@@ -35,7 +35,7 @@ install:
 	cp .env.example .env
 	docker-compose up -d --build
 	@make composer-install
-	@make yarn-interface
+	@make yarn-intall
 	docker-compose exec app php artisan key:generate
 	@make migrate
 	@make restart
