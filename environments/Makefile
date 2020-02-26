@@ -13,10 +13,11 @@ ps:
 stop:
 	docker-compose stop
 
-# docker-compose restart
+# docker-compose stop and up
 .PHONY: restart
 restart:
-	docker-compose restart
+	@make stop
+	@make up
 
 # docker-compose down
 .PHONY: down
