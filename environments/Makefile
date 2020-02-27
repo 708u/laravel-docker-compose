@@ -1,3 +1,6 @@
+# constants.
+export UID = $(shell id -u)
+
 # docker-compose up -d
 .PHONY: up
 up:
@@ -35,7 +38,9 @@ install:
 	cp .env.example .env
 	docker-compose up -d --build
 	@make composer-install
-	@make yarn-intall
+	@make yarn-install
+	sudo chmod -R 777 storage/
+	sudo chmod -R 777 bootstrap/cache
 	docker-compose exec app php artisan key:generate
 	@make migrate
 	@make restart
@@ -58,27 +63,29 @@ update:
 # Attach an app container.
 .PHONY: app
 app:
-	docker-compose exec app bash
+	docker-compose exec -u $(UID):$(UID) app bash
 
 # Attach a node container.
 .PHONY: node
 node:
-	docker-compose exec node sh
+	docker-compose exec -u $(UID):$(UID) node sh
 
 # Attach a composer container.
 .PHONY: composer
 composer:
 	docker run --rm -it -v ${PWD}:/app 708u/composer:1.9.3 bash
+	@make chown
 
 # Exec composer install
 .PHONY: composer-install
 composer-install:
 	docker run --rm -it -v ${PWD}:/app 708u/composer:1.9.3 composer install
+	@make chown
 
 # Exec yarn install
 .PHONY: yarn-install
 yarn-install:
-	docker-compose exec node yarn
+	docker-compose exec -u $(UID):$(UID) node yarn
 
 # Exec migrate.
 .PHONY: migrate
@@ -109,3 +116,8 @@ test:
 .PHONY: dusk
 dusk:
 	docker-compose exec app php artisan dusk
+
+# chown app dirctory.
+.PHONY: chown
+chown:
+	sudo chown -R $(USER):$(USER) ../$(shell basename `pwd`)
