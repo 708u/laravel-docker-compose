@@ -1,5 +1,6 @@
-# constants.
+# constants. For Avoid executing docker-compose exec as root.
 export UID = $(shell id -u)
+export GID = $(shell id -g)
 
 # docker-compose up -d
 .PHONY: up
@@ -39,8 +40,7 @@ install:
 	docker-compose up -d --build
 	@make composer-install
 	@make yarn-install
-	sudo chmod -R 777 storage/
-	sudo chmod -R 777 bootstrap/cache
+	@make writable
 	docker-compose exec app php artisan key:generate
 	@make migrate
 	@make restart
@@ -57,18 +57,19 @@ reinstall:
 update:
 	@make composer-install
 	@make yarn-install
+	@make writable
 	@make db-fresh
 	@make restart
 
 # Attach an app container.
 .PHONY: app
 app:
-	docker-compose exec -u $(UID):$(UID) app bash
+	docker-compose exec -u $(UID):$(GID) app bash
 
 # Attach a node container.
 .PHONY: node
 node:
-	docker-compose exec -u $(UID):$(UID) node sh
+	docker-compose exec -u $(UID):$(GID) node sh
 
 # Attach a composer container.
 .PHONY: composer
@@ -85,7 +86,7 @@ composer-install:
 # Exec yarn install
 .PHONY: yarn-install
 yarn-install:
-	docker-compose exec -u $(UID):$(UID) node yarn
+	docker-compose exec -u $(UID):$(GID) node yarn
 
 # Exec migrate.
 .PHONY: migrate
@@ -120,4 +121,10 @@ dusk:
 # chown app dirctory.
 .PHONY: chown
 chown:
-	sudo chown -R $(USER):$(USER) ../$(shell basename `pwd`)
+	sudo chown -R $(UID):$(GID) ../$(shell basename `pwd`)
+
+# chmod storage and bootstrap/cache dirctory.
+.PHONY: writable
+writable:
+	sudo chmod -R 777 storage/
+	sudo chmod -R 777 bootstrap/cache
