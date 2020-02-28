@@ -69,24 +69,22 @@ app:
 # Attach a node container.
 .PHONY: node
 node:
-	docker-compose exec -u $(UID):$(GID) node sh
+	docker-compose exec node sh
 
 # Attach a composer container.
 .PHONY: composer
 composer:
 	docker run --rm -it -v ${PWD}:/app 708u/composer:1.9.3 bash
-	@make chown
 
 # Exec composer install
 .PHONY: composer-install
 composer-install:
 	docker run --rm -it -v ${PWD}:/app 708u/composer:1.9.3 composer install
-	@make chown
 
 # Exec yarn install
 .PHONY: yarn-install
 yarn-install:
-	docker-compose exec -u $(UID):$(GID) node yarn
+	docker-compose exec node yarn
 
 # Exec migrate.
 .PHONY: migrate
@@ -118,7 +116,7 @@ test:
 dusk:
 	docker-compose exec app php artisan dusk
 
-# chown app dirctory.
+# chown app dirctory (for lunux distribution user).
 .PHONY: chown
 chown:
 	sudo chown -R $(UID):$(GID) ../$(shell basename `pwd`)
@@ -126,5 +124,4 @@ chown:
 # chmod storage and bootstrap/cache dirctory.
 .PHONY: writable
 writable:
-	sudo chmod -R 777 storage/
-	sudo chmod -R 777 bootstrap/cache
+	docker-compose exec app chmod -R 777 storage/ && chmod -R 777 bootstrap/cache
