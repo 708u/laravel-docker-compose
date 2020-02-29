@@ -80,5 +80,5 @@ services:
   #     - "4444:4444"
 
 volumes:
-  mysql-store:
-  redis-store:
+  mysql_store:
+  redis_store:
