@@ -2,7 +2,6 @@ version: "3.7"
 services:
   app:
     image: 708u/laravel-alpine:7.4.3-for-develop
-    container_name: ${PROJECT:-laravel}-app
     working_dir: "/app"
     volumes:
       - "./:/app"
@@ -12,9 +11,8 @@ services:
     tty: true
 
   # If you use the laravel queue worker in your app, you should remove this comment out.
-  # queue-worker:
+  # queue_worker:
   #   image: 708u/laravel-alpine:7.4.3-for-develop
-  #   container_name: ${PROJECT:-laravel}-queue-worker
   #   working_dir: "/app"
   #   volumes:
   #     - "./:/app"
@@ -24,15 +22,13 @@ services:
 
   node:
     image: node:13.8.0-alpine
-    container_name: ${PROJECT:-laravel}-node
     working_dir: "/app"
     volumes:
       - "./:/app"
     tty: true
 
-  asset-watcher:
+  asset_watcher:
     image: node:13.8.0-alpine
-    container_name: ${PROJECT:-laravel}-asset-watcher
     working_dir: "/app"
     volumes:
       - "./:/app"
@@ -44,7 +40,6 @@ services:
 
   nginx:
     image: nginx:1.17.8-alpine
-    container_name: ${PROJECT:-laravel}-nginx
     volumes:
       - "./docker/nginx/nginx.conf:/etc/nginx/nginx.conf"
       - "./public:/app/public"
@@ -56,7 +51,6 @@ services:
 
   mysql:
     image: mysql:5.7
-    container_name: ${PROJECT:-laravel}-mysql
     environment:
       MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD:-root}
       MYSQL_DATABASE: ${DB_DATABASE:-laravel}
@@ -71,7 +65,6 @@ services:
 
   redis:
     image: redis:5.0.7-alpine
-    container_name: ${PROJECT:-laravel}-redis
     ports:
       - "6379:6379"
     volumes:
@@ -81,7 +74,6 @@ services:
   # If you use the laravel dusk in your E2E testing, you should remove this comment out.
   # selenium:
   #   image: selenium/standalone-chrome
-  #   container_name: ${PROJECT:-laravel}-selenium
   #   ports:
   #     - "4444:4444"
 
