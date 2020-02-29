@@ -1,44 +1,41 @@
 version: "3.7"
+
+x-environment: &app
+  image: 708u/laravel-alpine:7.4.3-for-develop
+  working_dir: "/app"
+  volumes:
+    - "./:/app:cached"
+    - ./docker/php/php.ini:/usr/local/etc/php/php.ini
+  tty: true
+
+x-environment: &node
+  image: node:13.8.0-alpine
+  working_dir: "/app"
+  volumes:
+    - "./:/app:cached"
+  tty: true
+
 services:
   app:
-    image: 708u/laravel-alpine:7.4.3-for-develop
-    working_dir: "/app"
-    volumes:
-      - "./:/app:cached"
-      - ./docker/php/php.ini:/usr/local/etc/php/php.ini
+    <<: *app
     ports:
       - "8080:8080"
-    tty: true
 
-  # If you use the laravel queue worker in your app, you should remove this comment out.
-  # queue_worker:
-  #   image: 708u/laravel-alpine:7.4.3-for-develop
-  #   working_dir: "/app"
-  #   depends_on:
-  #     - redis
-  #   volumes:
-  #     - "./:/app"
-  #     - ./docker/php/php.ini:/usr/local/etc/php/php.ini
-  #   command: php artisan queue:work
-  #   tty: true
+  queue_worker:
+    <<: *app
+    depends_on:
+      - redis
+    command: php artisan queue:work
 
   node:
-    image: node:13.8.0-alpine
-    working_dir: "/app"
-    volumes:
-      - "./:/app:cached"
-    tty: true
+    <<: *node
 
   asset_watcher:
-    image: node:13.8.0-alpine
-    working_dir: "/app"
-    volumes:
-      - "./:/app:cached"
+    <<: *node
     # For BrowserSync
     ports:
       - "3000:3000"
     command: "yarn watch-poll"
-    tty: true
 
   nginx:
     image: nginx:1.17.8-alpine
@@ -80,5 +77,5 @@ services:
   #     - "4444:4444"
 
 volumes:
-  mysql_store:
-  redis_store:
+  mysql-store:
+  redis-store:
