@@ -4,7 +4,7 @@ services:
     image: 708u/laravel-alpine:7.4.3-for-develop
     working_dir: "/app"
     volumes:
-      - "./:/app"
+      - "./:/app:cached"
       - ./docker/php/php.ini:/usr/local/etc/php/php.ini
     ports:
       - "8080:8080"
@@ -14,6 +14,8 @@ services:
   # queue_worker:
   #   image: 708u/laravel-alpine:7.4.3-for-develop
   #   working_dir: "/app"
+  #   depends_on:
+  #     - redis
   #   volumes:
   #     - "./:/app"
   #     - ./docker/php/php.ini:/usr/local/etc/php/php.ini
@@ -24,17 +26,17 @@ services:
     image: node:13.8.0-alpine
     working_dir: "/app"
     volumes:
-      - "./:/app"
+      - "./:/app:cached"
     tty: true
 
   asset_watcher:
     image: node:13.8.0-alpine
     working_dir: "/app"
     volumes:
-      - "./:/app"
-    # For BrowserSync.
+      - "./:/app:cached"
+    # For BrowserSync
     ports:
-      "3000:3000"
+      - "3000:3000"
     command: "yarn watch-poll"
     tty: true
 
