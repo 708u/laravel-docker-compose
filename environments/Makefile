@@ -40,7 +40,6 @@ install:
 	docker-compose up -d --build
 	@make composer-install
 	@make yarn-install
-	@make writable
 	docker-compose exec app php artisan key:generate
 	@make migrate
 	@make restart
@@ -49,7 +48,7 @@ install:
 # Reinstall laravel peoject.
 .PHONY: reinstall
 reinstall:
-	@make down
+	@make destroy
 	@make install
 
 # Update dependencies.
@@ -57,7 +56,6 @@ reinstall:
 update:
 	@make composer-install
 	@make yarn-install
-	@make writable
 	@make db-fresh
 	@make restart
 
@@ -100,6 +98,20 @@ db-fresh:
 .PHONY: opt-clear
 opt-clear:
 	docker-compose exec app php artisan optimize:clear
+
+# Scale queue worker containers.
+.PHONY: worker-scale
+NUM=1
+ifdef num
+  NUM=${num}
+endif
+worker-scale:
+	docker-compose up -d --scale queue_worker=${NUM}
+
+# restart queue worker container.
+.PHONY: queue-restart
+queue-restart:
+	docker-compose restart queue_worker
 
 # Open tinker interface.
 .PHONY: tinker
