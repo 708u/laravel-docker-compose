@@ -100,7 +100,7 @@ opt-clear:
 	docker-compose exec app php artisan optimize:clear
 
 # Scale queue worker containers.
-.PHONY: worker-scale
+.PHONY: scale-worker
 NUM=1
 ifdef num
   NUM=${num}
