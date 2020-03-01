@@ -69,6 +69,16 @@ app:
 node:
 	docker-compose exec node sh
 
+# Attach a mysql container.
+.PHONY: mysql
+mysql:
+	docker-compose exec mysql bash -c 'mysql -u $$MYSQL_USER -p$$MYSQL_PASSWORD $$MYSQL_DATABASE'
+
+# Attach a redis container.
+.PHONY: redis
+redis:
+	docker-compose exec redis redis-cli
+
 # Attach a composer container.
 .PHONY: composer
 composer:
@@ -99,13 +109,13 @@ db-fresh:
 opt-clear:
 	docker-compose exec app php artisan optimize:clear
 
-# Scale queue worker containers.
+# Scale queue worker containers. # e.g make worker-scale num=3
 .PHONY: scale-worker
 NUM=1
 ifdef num
   NUM=${num}
 endif
-worker-scale:
+scale-worker:
 	docker-compose up -d --scale queue_worker=${NUM}
 
 # restart queue worker container.
