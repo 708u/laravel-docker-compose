@@ -3,6 +3,13 @@ version: "3.7"
 x-environment: &app
   image: 708u/laravel-alpine:7.4.3-for-develop
   working_dir: "/app"
+  environment:
+    - DB_CONNECTION=mysql
+    - DB_HOST=mysql
+    - CACHE_DRIVER=redis
+    - QUEUE_CONNECTION=redis
+    - SESSION_DRIVER=redis
+    - REDIS_HOST=redis
   volumes:
     - "./:/app:cached"
     - ./docker/php/php.ini:/usr/local/etc/php/php.ini
