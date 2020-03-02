@@ -25,6 +25,8 @@ x-environment: &node
 services:
   app:
     <<: *app
+    depends_on:
+      - mysql
     ports:
       - "8080:8080"
 
