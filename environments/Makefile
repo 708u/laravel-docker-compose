@@ -79,15 +79,10 @@ mysql:
 redis:
 	docker-compose exec redis redis-cli
 
-# Attach a composer container.
-.PHONY: composer
-composer:
-	docker run --rm -it -v ${PWD}:/app 708u/composer:1.9.3 bash
-
 # Exec composer install
 .PHONY: composer-install
 composer-install:
-	docker run --rm -it -v ${PWD}:/app 708u/composer:1.9.3 composer install
+	docker-compose exec app composer install
 
 # Exec yarn install
 .PHONY: yarn-install
