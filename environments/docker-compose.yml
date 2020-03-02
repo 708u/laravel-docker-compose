@@ -64,7 +64,7 @@ services:
     ports:
       - "3306:3306"
     volumes:
-      - "mysql-store:/var/lib/mysql"
+      - "mysql_store:/var/lib/mysql"
       - "./docker/mysql/my.cnf:/etc/mysql/conf.d/my.cnf"
       # Create testing DB
       # - "./docker/mysql/init/create-testing-db.sql:/docker-entrypoint-initdb.d/create-testing-db.sql"
@@ -74,7 +74,7 @@ services:
     ports:
       - "6379:6379"
     volumes:
-      - "redis-store:/data"
+      - "redis_store:/data"
     tty: true
 
   # If you use the laravel dusk in your E2E testing, you should remove this comment out.
