@@ -13,7 +13,7 @@ $ make
 $ cp -r src /path/to/your/app/name
 ```
 - option
-  - You can choose version of intallation laraecl flamework. e.g.
+  - You can choose version of intallation laravel flamework. e.g.
 
 ```
 $ make        // Install laravel latest
