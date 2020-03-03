@@ -12,6 +12,14 @@ $ cd laravel-docker-compose
 $ make
 $ cp -r src /path/to/your/app/name
 ```
+- option
+  - You can choose version of intallation laraecl flamework. e.g.
+
+```
+$ make        // Install laravel latest
+$ make v=7    // Install laravel 7.0.0
+$ make v=6.12 // Install laravel 6.12
+```
 
 ### Installation
 
