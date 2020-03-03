@@ -55,10 +55,8 @@ $ echo .vscode/ >> .gitignore
 - First, Install laravel dusk.
 
 ```bash
-$ make composer
-$ composer require --dev laravel/dusk
-$ exit
 $ make app
+$ composer require --dev laravel/dusk
 $ php artisan dusk:install
 ```
 
