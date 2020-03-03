@@ -41,8 +41,8 @@ install:
 	@make composer-install
 	@make yarn-install
 	docker-compose exec app php artisan key:generate
-	@make migrate
 	@make restart
+	@make migrate
 	@echo Install ${APP_NAME} successfully finished!
 
 # Reinstall laravel peoject.
