@@ -13,6 +13,9 @@
                 // "Remote Dir" : "Local Dir"
                 "/app": "${workspaceFolder}/src"
             },
+            "ignore": [
+                "**/vendor/**/*.php"
+            ],
         },
     ]
 }
