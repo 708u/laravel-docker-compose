@@ -10,7 +10,7 @@ Build develop environment of laravel application.
 $ git clone git@github.com:naoyaUda/laravel-docker-compose.git
 $ cd laravel-docker-compose
 $ make
-$ cp -r src /path/to/your/app/name
+$ cp -r $your_install_version_dir /path/to/your/app/name
 ```
 - option
   - You can choose version of intallation laravel flamework. e.g.
