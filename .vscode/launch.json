@@ -11,7 +11,7 @@
             "port": 9000,
             "pathMappings": {
                 // "Remote Dir" : "Local Dir"
-                "/app": "${workspaceFolder}/src"
+                "/app": "${workspaceFolder}"
             },
             "ignore": [
                 "**/vendor/**/*.php"
