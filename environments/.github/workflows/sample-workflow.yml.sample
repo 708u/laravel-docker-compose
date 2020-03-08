@@ -17,7 +17,6 @@ jobs:
         REDIS_HOST: redis
         DUSK_BASE_URL: http://localhost:8000
         CHROME_DRIVER_HOST: http://localhost:9515
-        TELESCOPE_ENABLED: false
     services:
       mysql:
         image: mysql:5.7
@@ -30,6 +29,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: cp .env.example .env
+
+      # Install dependencies
       - name: Cache composer vendor
         uses: actions/cache@v1
         with:
@@ -44,6 +45,8 @@ jobs:
       - run: yarn
       - run: yarn prod
       - run: php artisan key:generate
+
+      # Unit test
       - run: php artisan migrate
       - run: vendor/bin/phpunit
 
