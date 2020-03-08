@@ -8,6 +8,7 @@ jobs:
       - uses: actions/checkout@v2
       - run: mkdir src
       - run: sudo make
+      - run: ls
       - run: ls src
       - run: ls src/docker
     #   - run: cp .env.example .env
