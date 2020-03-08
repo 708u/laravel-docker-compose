@@ -1,0 +1,13 @@
+name: build-workflow
+on: [push]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: mkdir src
+      - run: sudo make
+      - run: ls -a
+      - run: ls src -a
+      - run: ls src/docker -a
