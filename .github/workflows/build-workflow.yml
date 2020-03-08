@@ -6,7 +6,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: make
+      - run: sudo make
     #   - run: cp .env.example .env
     #   - name: Cache composer vendor
     #     uses: actions/cache@v1
