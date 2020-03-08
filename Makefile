@@ -5,7 +5,7 @@ ifdef v
   WORKDIR=v${v}
 endif
 up:
-	docker run --rm -v ${PWD}:/app 708u/composer:1.9.3 composer create-project --prefer-dist laravel/laravel${VERSION} ${WORKDIR}
+	docker run --rm -v ${WORKDIR}:/app 708u/composer:1.9.3 composer create-project --prefer-dist laravel/laravel${VERSION} ${WORKDIR}
 	cp environments/docker-compose.yml ${WORKDIR} && cp -R environments/docker ${WORKDIR} && cp environments/Makefile ${WORKDIR}
 	@echo COMPOSE_PROJECT_NAME=laravel_app >> ${WORKDIR}/.env.example
 	@echo DUSK_HOST=http://nginx >> ${WORKDIR}/.env.example
