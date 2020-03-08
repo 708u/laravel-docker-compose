@@ -56,12 +56,12 @@ jobs:
       # - run: php artisan dusk
 
       # Archive Artifacts
-      - name: Archive screenshots
-        uses: actions/upload-artifact@v1
-        if: always()
-        with:
-          name: e2e-screenshots
-          path: tests/Browser/screenshots
+      # - name: Archive screenshots
+      #   uses: actions/upload-artifact@v1
+      #   if: always()
+      #   with:
+      #     name: e2e-screenshots
+      #     path: tests/Browser/screenshots
       - name: Archive laravel log
         uses: actions/upload-artifact@v1
         if: always()
