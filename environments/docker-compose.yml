@@ -30,11 +30,12 @@ services:
     ports:
       - "8080:8080"
 
-  queue_worker:
-    <<: *app
-    depends_on:
-      - redis
-    command: php artisan queue:work
+  # If you use the queue worker, you should remove this comment out.
+  # queue_worker:
+  #   <<: *app
+  #   depends_on:
+  #     - redis
+  #   command: php artisan queue:work
 
   node:
     <<: *node
