@@ -4,8 +4,11 @@ on: [push]
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
+    env:
+        PWD: $HOME
     steps:
       - uses: actions/checkout@v2
+      - run: export PWD=${pwd}
       - run: mkdir src
       - run: sudo make
       - run: ls
