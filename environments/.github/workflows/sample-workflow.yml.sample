@@ -44,10 +44,15 @@ jobs:
       - run: yarn
       - run: yarn prod
       - run: php artisan key:generate
+      - run: php artisan migrate
       - run: vendor/bin/phpunit
-      - run: chromedriver --whitelisted-ips > /dev/null 2>&1 &
-      - run: php artisan serve > /dev/null 2>&1 &
-      - run: php artisan dusk
+
+      # E2E test with dusk. Comment in these run if you use it.
+      # - run: chromedriver --whitelisted-ips > /dev/null 2>&1 &
+      # - run: php artisan serve > /dev/null 2>&1 &
+      # - run: php artisan dusk
+
+      # Archive Artifacts
       - name: Archive screenshots
         uses: actions/upload-artifact@v1
         if: always()
