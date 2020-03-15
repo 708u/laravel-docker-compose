@@ -11,6 +11,7 @@ jobs:
         APP_URL: http://localhost
         DB_CONNECTION: mysql
         DB_HOST: mysql
+        DB_DATABASE: YOUR_TESTING_DATABASE
         CACHE_DRIVER: redis
         QUEUE_CONNECTION: redis
         SESSION_DRIVER: redis
