@@ -12,10 +12,5 @@ up:
 		&& cp -R environments/docker ${WORKDIR} \
 		&& cp -R environments/.github ${WORKDIR} \
 		&& cp environments/Makefile ${WORKDIR}
-	@echo COMPOSE_PROJECT_NAME=laravel_app >> ${WORKDIR}/.env.example
-	@echo DUSK_BASE_URL=http://nginx >> ${WORKDIR}/.env.example
-	@echo CHROME_DRIVER_HOST=http://selenium:4444/wd/hub >> ${WORKDIR}/.env.example
-	@echo '# For CI testing' >> ${WORKDIR}/.env.example
-	@echo '# DUSK_BASE_URL=http://localhost:8000' >> ${WORKDIR}/.env.example
-	@echo '# CHROME_DRIVER_HOST=http://localhost:9515' >> ${WORKDIR}/.env.example
+	cat environments/.env.example >> ${WORKDIR}/.env.example
 	@echo new application succsessfully created in ${WORKDIR}.

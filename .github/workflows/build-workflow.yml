@@ -9,5 +9,6 @@ jobs:
       - run: mkdir src
       - run: sudo make
       - run: ls -a
+      - run: cat src/.env.example
       - run: ls src -a
       - run: ls src/docker -a
