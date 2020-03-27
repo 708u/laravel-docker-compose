@@ -3,24 +3,24 @@ export UID = $(shell id -u)
 export GID = $(shell id -g)
 
 .PHONY: up
-up: ## docker-compose up -d
+up: ## alias docker-compose up -d
 	docker-compose up -d
 
 .PHONY: ps
-ps: ## docker-compose ps
+ps: ## alias docker-compose ps
 	docker-compose ps
 
 .PHONY: stop
-stop: ## docker-compose stop
+stop: ## alias docker-compose stop
 	docker-compose stop
 
 .PHONY: restart
-restart: ## docker-compose restart
+restart: ## alias docker-compose restart
 	@make stop
 	@make up
 
 .PHONY: down
-down: ## docker-compose down
+down: ## alias docker-compose down
 	docker-compose down
 
 .PHONY: destroy
