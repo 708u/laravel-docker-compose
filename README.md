@@ -103,3 +103,36 @@ $ php artisan dusk:install
         );
     }
 ```
+
+### CI on Github Actions
+
+- rename sample workflow.
+
+```
+$ cd .github/workflows
+$ mv sample-workflow.yml.sample build-and-test.yml
+```
+
+- you should change some settings in `build-and-test.yml`
+
+```
+>>>
+- name: YOUR_ACTION_NAME
+~~~
+container:
+  image: 708u/laravel-alpine:7.4.3-node-browser
+  env:
+    APP_ENV: testing
+    APP_URL: http://localhost
+    DB_CONNECTION: mysql
+    DB_HOST: mysql
+-   DB_DATABASE: YOUR_TESTING_DATABASE
+~~~
+services:
+  mysql:
+    image: mysql:5.7
+    env:
+-     MYSQL_DATABASE: YOUR_DATABASE_NAME
+<<<
+
+```
