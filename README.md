@@ -67,7 +67,7 @@ $ php artisan dusk:install
     {
         return config('dusk.host');
     }
-    
+
     /**
      * Prepare for Dusk test execution.
      *
@@ -79,7 +79,7 @@ $ php artisan dusk:install
         // disable compatible chrome Driver.
         // static::startChromeDriver();
     }
-    
+
     /**
      * Create the RemoteWebDriver instance.
      *
@@ -120,7 +120,7 @@ $ mv sample-workflow.yml.sample build-and-test.yml
 - name: YOUR_ACTION_NAME
 ~~~
 container:
-  image: 708u/laravel-alpine:7.4.3-node-browser
+  image: 708u/laravel-alpine:7.4.4-node-browsers
   env:
     APP_ENV: testing
     APP_URL: http://localhost
