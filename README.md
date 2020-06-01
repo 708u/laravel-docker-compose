@@ -11,14 +11,17 @@ $ git clone git@github.com:naoyaUda/laravel-docker-compose.git
 $ cd laravel-docker-compose
 $ make
 $ cp -r $your_install_version_dir /path/to/your/app/name
+you can use laravel app with docker compose!
 ```
+
 - option
   - You can choose version of intallation laravel flamework. e.g.
 
-```
+```bash
 $ make        // Install laravel latest
 $ make v=7    // Install laravel 7.0.0
 $ make v=6.12 // Install laravel 6.12
+you can use desired laravel version.
 ```
 
 ### Installation
@@ -30,12 +33,6 @@ $ vi .env.example
 >>>
 - PROJECT=project-name
 + PROJECT=YOUR_APP_NAME
-- DB_HOST=127.0.0.1
-+ DB_HOST=mysql
-- DB_PASSWORD=
-+ DB_PASSWORD=PASSWORD
-- REDIS_HOST=127.0.0.1
-+ REDIS_HOST=redis
 <<<
 
 $ make install
@@ -62,7 +59,7 @@ $ php artisan dusk:install
 
 - Second, Change DuskTestCase below.
 
-```
+```php
    protected function baseUrl()
     {
         return config('dusk.host');
@@ -108,14 +105,14 @@ $ php artisan dusk:install
 
 - rename sample workflow.
 
-```
+```bash
 $ cd .github/workflows
 $ mv sample-workflow.yml.sample build-and-test.yml
 ```
 
 - you should change some settings in `build-and-test.yml`
 
-```
+```yml
 >>>
 - name: YOUR_ACTION_NAME
 ~~~
