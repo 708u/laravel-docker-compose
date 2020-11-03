@@ -6,12 +6,12 @@ ifdef v
 endif
 up:
 	docker run --rm -v ${PWD}:/app 708u/composer:1.9.3 composer create-project --prefer-dist laravel/laravel${VERSION} ${WORKDIR}
-	cp environments/docker-compose.yml ${WORKDIR} \
-		&& cp environments/public/.gitignore ${WORKDIR}/public \
-		&& cp environments/config/dusk.php ${WORKDIR}/config \
-		&& cp environments/Makefile ${WORKDIR}
-		&& cp -R environments/docker ${WORKDIR} \
-		&& cp -R environments/.github ${WORKDIR} \
+	cp -f environments/docker-compose.yml ${WORKDIR} \
+		&& cp -f environments/public/.gitignore ${WORKDIR}/public \
+		&& cp -f environments/config/dusk.php ${WORKDIR}/config \
+		&& cp -f environments/Makefile ${WORKDIR}
+		&& cp -fR environments/docker ${WORKDIR} \
+		&& cp -fR environments/.github ${WORKDIR} \
 	cat environments/.env.example >> ${WORKDIR}/.env.example
 	sed \
 		-e 's/DB_HOST=127.0.0.1/DB_HOST=mysql/g' \
