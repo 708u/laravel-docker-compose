@@ -7,7 +7,7 @@ Build develop environment of laravel application.
 ### Create New Application
 
 ```bash
-$ git clone git@github.com:naoyaUda/laravel-docker-compose.git
+$ git clone git@github.com:708u/laravel-docker-compose.git
 $ cd laravel-docker-compose
 $ make
 $ cp -r $your_install_version_dir /path/to/your/app/name
