@@ -9,9 +9,9 @@ up:
 	cp -f environments/docker-compose.yml ${WORKDIR} \
 		&& cp -f environments/public/.gitignore ${WORKDIR}/public \
 		&& cp -f environments/config/dusk.php ${WORKDIR}/config \
-		&& cp -f environments/Makefile ${WORKDIR}
+		&& cp -f environments/Makefile ${WORKDIR} \
 		&& cp -fR environments/docker ${WORKDIR} \
-		&& cp -fR environments/.github ${WORKDIR} \
+		&& cp -fR environments/.github ${WORKDIR}
 	cat environments/.env.example >> ${WORKDIR}/.env.example
 	sed \
 		-e 's/DB_HOST=127.0.0.1/DB_HOST=mysql/g' \
