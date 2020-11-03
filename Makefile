@@ -5,7 +5,7 @@ ifdef v
   WORKDIR=v${v}
 endif
 up:
-	docker run --rm -v ${PWD}:/app 708u/composer:1.9.3 composer create-project --prefer-dist laravel/laravel${VERSION} ${WORKDIR}
+	docker run --rm -v ${PWD}:/app composer:latest composer create-project --prefer-dist laravel/laravel${VERSION} ${WORKDIR}
 	cp -f environments/docker-compose.yml ${WORKDIR} \
 		&& cp -f environments/public/.gitignore ${WORKDIR}/public \
 		&& cp -f environments/config/dusk.php ${WORKDIR}/config \
